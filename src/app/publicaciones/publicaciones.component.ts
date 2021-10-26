@@ -1,17 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Publicaciones } from './publicaciones';
-
+import { PublicacionRoutingModule} from '../publicacion/publicacion-routing.module'
+import {HttpClient} from '@angular/common/http'
+import * as data from '../../assets/feed.json';
 @Component({
   selector: 'app-publicaciones',
   templateUrl: './publicaciones.component.html',
   styleUrls: ['./publicaciones.component.scss'],
 })
 export class PublicacionesComponent implements OnInit {
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  publicacionesArreglo: Publicaciones[] = []
 
-  ngOnInit() {}
+  datos = data;
+  datosUsuario: any = this.datos.usuario;
+  publicaciones : any = this.datos.publicaciones;
 
+  ngOnInit() {
+    console.log(this.publicaciones);
+  }
+
+  /*
   publicacionesArreglo: Publicaciones[] = [
     {
       imagen: '../assets/images/Post 1.png',
@@ -62,5 +72,6 @@ export class PublicacionesComponent implements OnInit {
       id: 12
     },
   ]
+  */
 
 }

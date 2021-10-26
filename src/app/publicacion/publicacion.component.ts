@@ -9,7 +9,6 @@ import { Publicaciones } from '../publicaciones/publicaciones';
 })
 export class PublicacionComponent implements OnInit {
   idPublicacion: number;
-  publicacion: any;
 
   constructor(private rutaActiva: ActivatedRoute) { }
 
