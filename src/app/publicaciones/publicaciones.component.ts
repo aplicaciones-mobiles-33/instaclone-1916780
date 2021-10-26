@@ -17,8 +17,30 @@ export class PublicacionesComponent implements OnInit {
   datosUsuario: any = this.datos.usuario;
   publicaciones : any = this.datos.publicaciones;
 
+  _filtrarPublicaciones: string = this.datosUsuario.publicaciones;
+
+  publicacionesPorUsuario= [];
+
+  get filtrarPublicaciones(): string{
+    return this._filtrarPublicaciones;
+  }
+  
+  set filtrarPublicaciones(valor: string){
+    console.log(valor);
+    console.log('1');
+    this._filtrarPublicaciones =valor;
+    console.log(this._filtrarPublicaciones);
+    this.publicacionesPorUsuario = this.filtroPublicaciones(valor);
+    console.log(this.publicacionesPorUsuario);
+  }
+
+  filtroPublicaciones(nombreUsuario: string): []{
+    nombreUsuario = nombreUsuario.toLocaleLowerCase();
+    return this.publicaciones.filter((publicacion: any) => publicacion.usuario.toLocaleLowerCase().includes(nombreUsuario))
+  }
+
   ngOnInit() {
-    console.log(this.publicaciones);
+    this.filtrarPublicaciones = this.datosUsuario.nombre;
   }
 
   /*

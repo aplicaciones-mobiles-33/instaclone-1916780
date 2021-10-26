@@ -24,8 +24,9 @@
                             </ion-grid>
                         </ion-card-header>
                         <ion-card-content>
-                            Card
-                            <img src="{{publicacion.imagenPost}}" alt="">
+                            <a [routerLink]="['/tabs/publicacion', publicacion.id]">
+                                <img src="{{publicacion.imagenPost}}" alt="">
+                            </a>
                             <div class="opciones">
                                 <ion-col size="12">
                                     <ion-icon name="paper-plane-outline" class="option"></ion-icon>

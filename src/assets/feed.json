@@ -19,7 +19,7 @@
         },
         {
             "id": 2,
-            "usuario": "max",
+            "usuario": "maxelsolovino",
             "imagenPost": "../assets/images/feed/feed2.png",
             "avatarUsuario": "../assets/images/avatar.jpg",
             "descripcionPost": "holaaaa"
@@ -37,6 +37,27 @@
             "imagenPost": "../assets/images/feed/feed1.png",
             "avatarUsuario": "../assets/images/avatar.jpg",
             "descripcionPost": "<3  <3 <3 <3 "
+        },
+        {
+            "id": 5,
+            "usuario": "corgimaya",
+            "imagenPost": "../assets/images/feed/feed1.png",
+            "avatarUsuario": "../assets/images/avatar.jpg",
+            "descripcionPost": "<3  <3 <3 <3 "
+        },
+        {
+            "id": 6,
+            "usuario": "maxelsolovino",
+            "imagenPost": "../assets/images/Post 6.png",
+            "avatarUsuario": "../assets/images/avatar.jpg",
+            "descripcionPost": "holaaaa"
+        },
+        {
+            "id": 7,
+            "usuario": "oreo",
+            "imagenPost": "../assets/images/Post 7.png",
+            "avatarUsuario": "../assets/images/avatar.jpg",
+            "descripcionPost": "la pura vida <3"
         }
     ]
 }
