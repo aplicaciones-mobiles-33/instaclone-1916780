@@ -12,6 +12,7 @@
             <ion-title size="large">Tab 1</ion-title>
         </ion-toolbar>
     </ion-header>
+
     <ion-grid>
         <ion-row *ngFor="let publicacion of publicaciones">
             <ion-col size="12">
@@ -19,14 +20,16 @@
                     <ion-card-content>
                         <ion-card-header>
                             <ion-grid>
-                                <img src="../../assets/images/avatar.jpg" alt="" height="23px">
-
+                                <img src="../../assets/images/avatar.jpg" alt="" height="23px"> {{publicacion.usuario}} {{publicacion.key}}
                             </ion-grid>
                         </ion-card-header>
                         <ion-card-content>
-                            <a [routerLink]="['/tabs/publicacion', publicacion.id]">
-                                <img src="{{publicacion.imagenPost}}" alt="">
-                            </a>
+
+
+                            <a [routerLink]="['/tabs/p']" [queryParams]="{publicacionId: publicacion.key}"> <img src="{{publicacion.urlFoto}}" alt=""></a>
+                            <p>
+                                {{publicacion.caption}}
+                            </p>
                             <div class="opciones">
                                 <ion-col size="12">
                                     <ion-icon name="paper-plane-outline" class="option"></ion-icon>
@@ -39,4 +42,6 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+
+
 </ion-content>

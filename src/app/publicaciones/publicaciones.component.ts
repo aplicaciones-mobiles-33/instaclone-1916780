@@ -11,36 +11,18 @@ import * as data from '../../assets/feed.json';
 export class PublicacionesComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
-  publicacionesArreglo: Publicaciones[] = []
-
-  datos = data;
-  datosUsuario: any = this.datos.usuario;
-  publicaciones : any = this.datos.publicaciones;
-
-  _filtrarPublicaciones: string = this.datosUsuario.publicaciones;
-
   publicacionesPorUsuario= [];
 
-  get filtrarPublicaciones(): string{
-    return this._filtrarPublicaciones;
-  }
-  
-  set filtrarPublicaciones(valor: string){
-    console.log(valor);
-    console.log('1');
-    this._filtrarPublicaciones =valor;
-    console.log(this._filtrarPublicaciones);
-    this.publicacionesPorUsuario = this.filtroPublicaciones(valor);
-    console.log(this.publicacionesPorUsuario);
-  }
-
-  filtroPublicaciones(nombreUsuario: string): []{
-    nombreUsuario = nombreUsuario.toLocaleLowerCase();
-    return this.publicaciones.filter((publicacion: any) => publicacion.usuario.toLocaleLowerCase().includes(nombreUsuario))
+  obtenerPublicaciones(): void{
+    this.http.get('https://insta-clone-app-1916780-default-rtdb.firebaseio.com/')
+    .subscribe(publicacionesRespuesta =>{
+      
+      console.log(publicacionesRespuesta);
+    })
   }
 
   ngOnInit() {
-    this.filtrarPublicaciones = this.datosUsuario.nombre;
+    this.obtenerPublicaciones();
   }
 
   /*

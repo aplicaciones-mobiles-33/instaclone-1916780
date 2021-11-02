@@ -1,17 +1,52 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Crear Publicacion
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Crear Publicacion</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-label>Caption de foto: </ion-label>
+                {{descripcionFoto}}
+            </ion-col>
+            <ion-col>
+                <ion-input placeholder='caption de foto' type='text' [(ngModel)]='datosPublicacion.caption'></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-label>Usuario: {{usuario}}</ion-label>
+            </ion-col>
+            <ion-col>
+                <ion-input placeholder='kennethrdz' type='text' [(ngModel)]='datosPublicacion.usuario' (change)='validarDatos({caption: descripcionFoto, usuario: usuario})'></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size='12'>
+                <ion-button class='col-12-btn' (click)='crearPublicacion(datosPublicacion)'>Crear Publicacion</ion-button>
+            </ion-col>
+        </ion-row>
+        <!--
+          <ion-row>
+            <ion-col>
+                <ion-label>
+                    Escribir ruta de imagen
+                </ion-label>
+            </ion-col>
+            <ion-col>
+                <ion-input type='text' placeholder=''></ion-input>
+            </ion-col>
+        </ion-row>
+        -->
+    </ion-grid>
 </ion-content>
