@@ -42,7 +42,8 @@ export class Tab3Page {
   }
 
   ngOnInit(){
-    //this.obtenerPerfil();
+    this.obtenerPerfil();
+    this.obtenerPublicaciones();
   }
 
 }
