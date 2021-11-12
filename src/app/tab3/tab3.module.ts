@@ -7,8 +7,8 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
-import { PerfilComponent } from '../perfil/perfil.component';
 import { PublicacionesModule } from '../publicaciones/publicaciones.module';
+import { PerfilModule } from '../perfil/perfil.module';
 
 @NgModule({
   imports: [
@@ -18,8 +18,9 @@ import { PublicacionesModule } from '../publicaciones/publicaciones.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
+    PerfilModule, 
     PublicacionesModule
   ],
-  declarations: [Tab3Page, PerfilComponent]
+  declarations: [Tab3Page]
 })
 export class Tab3PageModule {}

@@ -1,27 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { Publicaciones } from './publicaciones';
-import { PublicacionRoutingModule} from '../publicacion/publicacion-routing.module'
-import {HttpClient} from '@angular/common/http'
-import * as data from '../../assets/feed.json';
+//import {HttpClient} from '@angular/common/http'
+//import * as data from '../../assets/feed.json';
+import { FirebaseDbService } from '../firebase-db.service';
+
 @Component({
   selector: 'app-publicaciones',
   templateUrl: './publicaciones.component.html',
   styleUrls: ['./publicaciones.component.scss'],
 })
 export class PublicacionesComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+  constructor(private db: FirebaseDbService) { }
 
   publicacionesPorUsuario= [];
-
+  publicacionesKey = [];
+  nombre = ''
+  obtenerNombre(): void{
+    this.db.getPerfilUsuario().subscribe(
+      respuesta =>{
+        this.nombre = respuesta['nombre']
+        console.log('Nombre')
+        console.log(this.nombre)
+      }
+    )
+  }
   obtenerPublicaciones(): void{
-    this.http.get('https://insta-clone-app-1916780-default-rtdb.firebaseio.com/')
-    .subscribe(publicacionesRespuesta =>{
-      
-      console.log(publicacionesRespuesta);
-    })
+    this.db.getPublicaciones().subscribe(
+      res => {
+        console.log(res)
+        this.publicacionesPorUsuario = res
+      }
+    );
   }
 
   ngOnInit() {
+    this.obtenerNombre();
     this.obtenerPublicaciones();
   }
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { FirebaseDbService } from '../firebase-db.service';
+import { SubirFotoService } from '../subir-foto.service';
 
 @Component({
   selector: 'app-tab2',
@@ -8,11 +9,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Tab2Page {
 
-  constructor(private http: HttpClient) {}
+  constructor(private db: FirebaseDbService, 
+    private storage: SubirFotoService) {}
   descripcionFoto: string;
   usuario: string;
 
-  urlFoto: string = '../assets/images/feed/feed1.png';
+  urlFoto: string// '../assets/images/feed/feed1.png';
 
   datosPublicacion: any = {
     usuario: String,
@@ -20,6 +22,7 @@ export class Tab2Page {
     urlFoto: String
   };
 
+  /*
   validarDatos(params): void {
     console.log(params);
     this.datosPublicacion = {
@@ -29,16 +32,26 @@ export class Tab2Page {
     }
     console.log(this.datosPublicacion)
   }
+  */
 
   crearPublicacion(params: {usuario: string; caption: string; urlFoto: string}){
-    this.http.post('https://insta-clone-app-1916780-default-rtdb.firebaseio.com/publicaciones.json', params)
-    .subscribe(datosRespuesta => {
-      console.log(datosRespuesta);
-    })
+    this.db.postPublicacion(params).subscribe(
+      datos =>{
+        console.log(datos)
+      }
+    )
   }
+
+  onChange(event){
+    console.log(event);
+    this.urlFoto = event.target.files[0];
+    this.storage.subirFoto(this.urlFoto, '');
+  }
+
   ngOnInit(){
     this.descripcionFoto = '';
     this.usuario = '';
+    this.urlFoto = '';
     this.datosPublicacion = {
       usuario: this.usuario,
       caption: this.descripcionFoto,
