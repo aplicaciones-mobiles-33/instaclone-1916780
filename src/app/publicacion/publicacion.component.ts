@@ -3,7 +3,6 @@ import { ActivatedRoute, Router, ParamMap} from '@angular/router';
 //import * as data from '../../assets/feed.json';
 import { Location } from '@angular/common';
 
-import { HttpClient } from '@angular/common/http';
 import { FirebaseDbService } from '../firebase-db.service';
 import { Publicacion } from './publicacion';
 

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output} from '@angular/core';
 import { FirebaseDbService } from '../firebase-db.service';
-import { Perfil } from './perfil';
 
 @Component({
   selector: 'app-perfil',
@@ -16,7 +15,41 @@ export class PerfilComponent implements OnInit {
     seguidores: '',
     siguiendo: ''
   }
-  publicaciones = 0
+  editando: boolean = false;
+
+  nuevoUsuario: string;
+  nuevaPresentacion: string;
+
+  publicaciones = [] //test
+
+  guardarCambios(){
+    if(this.nuevoUsuario){
+      let params = {
+        usuario: this.nuevoUsuario
+      }
+      this.db.updateNombreUsuario(params).subscribe(
+        res => {
+          console.log(res);
+        }
+      )
+    }
+    if(this.nuevaPresentacion){
+      let paramsPresentacion = {
+        bio: this.nuevaPresentacion
+      }
+      this.db.updateNombreUsuario(paramsPresentacion).subscribe(
+        res =>{
+          console.log(res);
+        }
+      )
+    }
+  }
+  toggleEditar(){
+    if(this.editando){
+      this.guardarCambios();
+    }
+    this.editando = !this.editando;
+  }
   obtenerPerfil(): void{
     this.db.getPerfilUsuario().subscribe(
       respuesta => {
@@ -29,17 +62,12 @@ export class PerfilComponent implements OnInit {
       }
     )
   }
-
-  /*
-  obtenerPublicaciones(){
-    this.db.getPublicaciones().subscribe(res => {
-      console.log(res);
-    })
+  obtenerPublicacionesUsuario(){
+    this.db.getPublicacionesUsuario();
   }
-  */
 
   ngOnInit(){
     this.obtenerPerfil();
-    //this.obtenerPublicaciones();
+    //this.obtenerPublicacionesUsuario();
   }
 }

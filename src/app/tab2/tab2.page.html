@@ -12,7 +12,6 @@
             <ion-title size="large">Crear Publicacion</ion-title>
         </ion-toolbar>
     </ion-header>
-
     <ion-grid>
         <ion-row>
             <ion-col>
@@ -34,11 +33,17 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <ion-label>Foto: </ion-label>
+                <ion-label>Agregar Foto: </ion-label>
             </ion-col>
             <ion-col>
-                <ion-input type="file" accept="image/*" (change)="onChange($event)">
+                <!--
+                    <ion-input type="file" accept="image/*" (change)="onChange($event)" name="foto">
                 </ion-input>
+                -->
+                <ion-button (click)="agregarFotoAGaleria()">Tomar foto</ion-button>
+                <div *ngFor="let photo of photos; index as position">
+
+                </div>
             </ion-col>
         </ion-row>
         <ion-row>
@@ -46,17 +51,5 @@
                 <ion-button class='col-12-btn' (click)='crearPublicacion(datosPublicacion)'>Crear Publicacion</ion-button>
             </ion-col>
         </ion-row>
-        <!--
-          <ion-row>
-            <ion-col>
-                <ion-label>
-                    Escribir ruta de imagen
-                </ion-label>
-            </ion-col>
-            <ion-col>
-                <ion-input type='text' placeholder=''></ion-input>
-            </ion-col>
-        </ion-row>
-        -->
     </ion-grid>
 </ion-content>

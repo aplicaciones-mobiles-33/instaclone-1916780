@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+//import { HttpClient } from '@angular/common/http';
+
 import { FirebaseDbService } from '../firebase-db.service';
 import { SubirFotoService } from '../subir-foto.service';
+
+import { PhotoService } from '../photo.service';
 
 @Component({
   selector: 'app-tab2',
@@ -8,55 +12,58 @@ import { SubirFotoService } from '../subir-foto.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  
+  constructor(
+    private db: FirebaseDbService,
+    private subirFotoService: SubirFotoService,
+    public photoService: PhotoService,
+  ) {}
 
-  constructor(private db: FirebaseDbService, 
-    private storage: SubirFotoService) {}
-  descripcionFoto: string;
-  usuario: string;
+  descripcionFoto: String;
+  usuario: String ;
 
-  urlFoto: string// '../assets/images/feed/feed1.png';
+  urlFoto: String; // = '../assets/images/feed/feed1.png';
 
   datosPublicacion: any = {
     usuario: String,
-    caption: String,
+    descripcionFoto: String,
     urlFoto: String
-  };
-
-  /*
-  validarDatos(params): void {
-    console.log(params);
-    this.datosPublicacion = {
-      usuario: this.usuario,
-      caption: this.descripcionFoto,
-      urlFoto: this.urlFoto
-    }
-    console.log(this.datosPublicacion)
-  }
-  */
-
-  crearPublicacion(params: {usuario: string; caption: string; urlFoto: string}){
-    this.db.postPublicacion(params).subscribe(
-      datos =>{
-        console.log(datos)
-      }
-    )
   }
 
-  onChange(event){
+  crearPublicacion(params: {usuario: String; descripcionFoto: String; urlFoto: String}) {
+   this.db.postPublicacion(params).subscribe(res => {
+     console.log(res);
+   })
+  }
+
+  onChange(event) {
     console.log(event);
+
+    
     this.urlFoto = event.target.files[0];
-    this.storage.subirFoto(this.urlFoto, '');
+    this.subirFotoService.subirFoto('urlFotoTest', this.urlFoto);
+
   }
 
-  ngOnInit(){
+  agregarFotoAGaleria() {
+    this.photoService.agregarFoto();
+  }
+
+  async ngOnInit() {
+    await this.photoService.cargarFotosGuardadas(); //
     this.descripcionFoto = '';
     this.usuario = '';
     this.urlFoto = '';
+
     this.datosPublicacion = {
-      usuario: this.usuario,
-      caption: this.descripcionFoto,
+      usuario: this.usuario, 
+      descripcionFoto: this.descripcionFoto,
       urlFoto: this.urlFoto
     }
+
     console.log(this.datosPublicacion);
+
+
   }
+
 }

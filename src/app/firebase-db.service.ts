@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import {AngularFirestore} from '@angular/fire/compat/firestore'
+
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseDbService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private fbdb: AngularFireDatabase
+    ) { }
 
   resArray = [];
 
@@ -41,6 +47,10 @@ export class FirebaseDbService {
     return this.http.put('https://insta-clone-app-1916780-default-rtdb.firebaseio.com/usuario/bio.json', nuevaBio)
   }
   updateNombreUsuario(nuevoNombre){
+    console.log(nuevoNombre);
     return this.http.put('https://insta-clone-app-1916780-default-rtdb.firebaseio.com/usuario.json', nuevoNombre)
+  }
+  getPublicacionesUsuario(){
+    return this.fbdb.list('/publicaciones', ref => ref.orderByChild('usuario').equalTo('kennethrdz'))
   }
 }

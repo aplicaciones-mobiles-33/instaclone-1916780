@@ -1,7 +1,4 @@
-import { Component, OnInit} from '@angular/core';
-import { FirebaseDbService } from '../firebase-db.service';
-import { PerfilComponent } from '../perfil/perfil.component';
-import { SubirFotoService } from '../subir-foto.service';
+import { Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-tab3',
@@ -9,23 +6,7 @@ import { SubirFotoService } from '../subir-foto.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit{
-  perfilUsuario: PerfilComponent
-  nombre = '';
-  constructor(private db: FirebaseDbService, 
-    private storageService: SubirFotoService){
-    }
-  
-  obtenerNombre(): void{
-    this.db.getPerfilUsuario().subscribe(
-      respuesta =>{
-        this.nombre = respuesta['nombre']
-        console.log('Nombre')
-        console.log(this.nombre)
-      }
-    )
-  }
-  
+  @Input() nombreUsuario: string = '';
   ngOnInit(): void {
-    this.obtenerNombre()
   }
 }

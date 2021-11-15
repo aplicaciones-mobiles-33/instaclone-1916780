@@ -11,7 +11,7 @@ import { FirebaseDbService } from '../firebase-db.service';
 export class PublicacionesComponent implements OnInit {
   constructor(private db: FirebaseDbService) { }
 
-  publicacionesPorUsuario= [];
+  publicaciones= [];
   publicacionesKey = [];
   nombre = ''
   obtenerNombre(): void{
@@ -27,7 +27,7 @@ export class PublicacionesComponent implements OnInit {
     this.db.getPublicaciones().subscribe(
       res => {
         console.log(res)
-        this.publicacionesPorUsuario = res
+        this.publicaciones = res
       }
     );
   }
